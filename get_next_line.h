@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:32:00 by oel-feng          #+#    #+#             */
-/*   Updated: 2023/11/26 16:59:33 by oel-feng         ###   ########.fr       */
+/*   Updated: 2023/11/26 17:07:22 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define GET_NEXT_LINE_H
 
 # include <stdlib.h>
+# include <stdio.h>
+# include <fcntl.h>
 # include <unistd.h>
 # define BUFFER_SIZE 1
 
