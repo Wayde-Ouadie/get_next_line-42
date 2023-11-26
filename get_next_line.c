@@ -6,68 +6,81 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:31:16 by oel-feng          #+#    #+#             */
-/*   Updated: 2023/11/26 19:22:56 by oel-feng         ###   ########.fr       */
+/*   Updated: 2023/11/26 21:16:42 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 
-static char	*ft_get_line(char **line)
+static char	*ft_get_line(char *line)
 {
 	char	*tmp;
 	char	*res;
-	int		i;
+	size_t	i;
 
 	i = 0;
-	if (!*line)
-		return (NULL);
-	while ((*line)[i] && (*line)[i] != '\n') 
+	while (line[i] && line[i] != '\n') 
 		i++;
-	if ((*line)[i] == '\n')
+	if (!line)
+		return (NULL);
+	res = ft_substr(line, 0, i + 1);
+	if (!res)
 	{
-		res = ft_substr(*line, 0, i + 1);
-		tmp = ft_strdup(*line + i + 1);
-		if (!tmp)
-			return (free(res), NULL);
-		free(*line);
-		*line = tmp;
+		if (line)
+			return (line);
+		line = NULL;
+		return (NULL);
 	}
-	else
+	if (res == NULL)
 	{
-		res = ft_strdup(*line);
-		if (!res)
-			return (NULL);
-		free(*line);
-		*line = NULL;
+		free(res);
+		res = NULL;
 	}
+	line[i + 1] = '\0';
 	return (res);
+}
+
+static char	*read_line_check(int fd, char *buff, char *line)
+{
+	int	lread;
+
+	lread = 1;
+	while (lread > 0)
+	{
+		lread = read(fd, buff, BUFFER_SIZE);
+		if (lread == -1)
+			return (NULL);
+		else if (lread == 0)
+			break ;
+		buff[lread] = '\0';
+		if (!line)
+			line = ft_strdup("");
+		line = ft_strjoin(line, buff);
+		free(line);
+		if (!line)
+			return (NULL);
+		if (ft_strchr(buff, '\n'))
+			break ;
+	}
+	return (line);
 }
 
 char	*get_next_line(int fd)
 {
 	static char	*line;
 	char		*buff;
-	char		*tmp;
-	int			lread;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE >= INT_MAX)
 		return (NULL);
 	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buff)
 		return (NULL);
-	lread = 1;
-	while (!ft_strchr(line, '\n') && lread < 0)
-	{
-
-		lread = read(fd, buff, BUFFER_SIZE);
-		if (lread == -1)
-			return (free(buff), NULL);
-		buff[lread] = '\0';
-		line = ft_strjoin(line, buff);
-		free(line);
-		line = tmp;
-	}
+	line = read_line_check(fd, buff, line);
 	free(buff);
-	return (ft_get_line(&line));
+	buff = NULL;
+	if (!line)
+		return (free(line), NULL);
+	line = ft_get_line(line);
+	return (line);
 }

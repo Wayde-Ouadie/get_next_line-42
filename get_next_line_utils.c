@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:31:11 by oel-feng          #+#    #+#             */
-/*   Updated: 2023/11/26 19:18:51 by oel-feng         ###   ########.fr       */
+/*   Updated: 2023/11/26 21:17:37 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,8 @@ size_t	ft_strlen(char *str)
 
 char	*ft_strchr(char *str, int c)
 {
-	if (!str)
-	{
-
-		puts("1");
+	if (!str)		
 		return (NULL);
-	}
 	while ((char)c != *str)
 	{
 		if (!*str)
@@ -42,8 +38,8 @@ char	*ft_strchr(char *str, int c)
 char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*res;
-	int		i;
-	int		j;
+	size_t	i;
+	size_t	j;
 
 	if (!s1 || !s2)
 		return (NULL);
@@ -64,16 +60,21 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 {
 	char	*res;
 	size_t	i;
+	size_t	j;
 
 	if (!s)
 		return (NULL);
 	if (start > ft_strlen(s))
-		return (ft_strdup(""));
-	res = malloc(sizeof(char) * (len + 1));
+		j = 0;
+	else if (ft_strlen(s) - start < len)
+		j = ft_strlen(s) - start;
+	else
+		j = len;
+	res = malloc(sizeof(char) * (j + 1));
 	if (!res)
 		return (NULL);
 	i = 0;
-	while (i < len && s[start + i])
+	while (i < j)
 	{
 		res[i] = s[start + i];
 		i++;
@@ -85,7 +86,7 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 char	*ft_strdup(char *s)
 {
 	char	*res;
-	int		i;
+	size_t	i;
 
 	res = malloc(sizeof(char) * (ft_strlen(s) + 1));
 	if (!res)

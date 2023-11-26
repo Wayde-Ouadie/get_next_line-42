@@ -6,18 +6,18 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:32:00 by oel-feng          #+#    #+#             */
-/*   Updated: 2023/11/26 19:02:21 by oel-feng         ###   ########.fr       */
+/*   Updated: 2023/11/26 21:16:55 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
+# define BUFFER_SIZE 30
 # include <stdlib.h>
-# include <stdio.h>
+# include <limits.h>
 # include <fcntl.h>
 # include <unistd.h>
-# define BUFFER_SIZE 30
 
 char	*get_next_line(int fd);
 size_t	ft_strlen(char *str);
