@@ -6,14 +6,14 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:32:00 by oel-feng          #+#    #+#             */
-/*   Updated: 2023/11/26 21:16:55 by oel-feng         ###   ########.fr       */
+/*   Updated: 2023/11/26 23:45:59 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-# define BUFFER_SIZE 30
+# define BUFFER_SIZE 1
 # include <stdlib.h>
 # include <limits.h>
 # include <fcntl.h>

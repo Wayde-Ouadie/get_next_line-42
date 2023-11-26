@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:31:16 by oel-feng          #+#    #+#             */
-/*   Updated: 2023/11/26 21:16:42 by oel-feng         ###   ########.fr       */
+/*   Updated: 2023/11/26 23:45:45 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,23 @@
 
 static char	*ft_get_line(char *line)
 {
-	char	*tmp;
 	char	*res;
 	size_t	i;
 
 	i = 0;
 	while (line[i] && line[i] != '\n') 
 		i++;
-	if (!line)
+	if (line[i] == '\0')
 		return (NULL);
-	res = ft_substr(line, 0, i + 1);
+	res = ft_substr(line, i + 1, ft_strlen(line) - i);
 	if (!res)
 	{
 		if (line)
-			return (line);
+			free(line);
 		line = NULL;
 		return (NULL);
 	}
-	if (res == NULL)
+	if (*res == '\0')
 	{
 		free(res);
 		res = NULL;
@@ -43,10 +42,11 @@ static char	*ft_get_line(char *line)
 
 static char	*read_line_check(int fd, char *buff, char *line)
 {
-	int	lread;
+	int		lread;
+	char	*tmp;
 
 	lread = 1;
-	while (lread > 0)
+	while (lread)
 	{
 		lread = read(fd, buff, BUFFER_SIZE);
 		if (lread == -1)
@@ -56,8 +56,10 @@ static char	*read_line_check(int fd, char *buff, char *line)
 		buff[lread] = '\0';
 		if (!line)
 			line = ft_strdup("");
-		line = ft_strjoin(line, buff);
-		free(line);
+		tmp = line;
+		line = ft_strjoin(tmp, buff);
+		free(tmp);
+		tmp = NULL;
 		if (!line)
 			return (NULL);
 		if (ft_strchr(buff, '\n'))
@@ -69,6 +71,7 @@ static char	*read_line_check(int fd, char *buff, char *line)
 char	*get_next_line(int fd)
 {
 	static char	*line;
+	char		*tmp;
 	char		*buff;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE >= INT_MAX)
@@ -76,11 +79,16 @@ char	*get_next_line(int fd)
 	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buff)
 		return (NULL);
-	line = read_line_check(fd, buff, line);
+	tmp = read_line_check(fd, buff, line);
 	free(buff);
 	buff = NULL;
-	if (!line)
-		return (free(line), NULL);
-	line = ft_get_line(line);
-	return (line);
+	if (!tmp)
+	{
+		if (line)
+			free(line);
+		line = NULL;
+		return (NULL);
+	}
+	line = ft_get_line(tmp);
+	return (tmp);
 }

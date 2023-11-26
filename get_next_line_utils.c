@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:31:11 by oel-feng          #+#    #+#             */
-/*   Updated: 2023/11/26 21:18:29 by oel-feng         ###   ########.fr       */
+/*   Updated: 2023/11/26 23:45:33 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t	ft_strlen(char *str)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (str[i])
@@ -48,11 +48,18 @@ char	*ft_strjoin(char *s1, char *s2)
 	res = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
 	if (!res)
 		return (NULL);
-	while (s1[i++])
+	while (s1[i])
+	{
 		res[i] = s1[i];
-	while (s2[j++])
-		res[i + j] = s2[j];
-	res[i + j] = '\0';
+		i++;
+	}
+	while (s2[j])
+	{
+		res[i] = s2[j];
+		j++;
+		i++;
+	}
+	res[i] = '\0';
 	return (res);
 }
 
@@ -64,7 +71,7 @@ char	*ft_substr(char *s, unsigned int start, size_t len)
 
 	if (!s)
 		return (NULL);
-	if (start > ft_strlen(s))
+	if (start >= ft_strlen(s))
 		j = 0;
 	else if (ft_strlen(s) - start < len)
 		j = ft_strlen(s) - start;
