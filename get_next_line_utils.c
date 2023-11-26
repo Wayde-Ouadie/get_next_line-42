@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:31:11 by oel-feng          #+#    #+#             */
-/*   Updated: 2023/11/26 16:59:08 by oel-feng         ###   ########.fr       */
+/*   Updated: 2023/11/26 19:18:51 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,12 @@ size_t	ft_strlen(char *str)
 
 char	*ft_strchr(char *str, int c)
 {
+	if (!str)
+	{
+
+		puts("1");
+		return (NULL);
+	}
 	while ((char)c != *str)
 	{
 		if (!*str)

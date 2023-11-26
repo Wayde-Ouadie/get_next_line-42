@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:32:00 by oel-feng          #+#    #+#             */
-/*   Updated: 2023/11/26 17:07:22 by oel-feng         ###   ########.fr       */
+/*   Updated: 2023/11/26 19:02:21 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdio.h>
 # include <fcntl.h>
 # include <unistd.h>
-# define BUFFER_SIZE 1
+# define BUFFER_SIZE 30
 
 char	*get_next_line(int fd);
 size_t	ft_strlen(char *str);
