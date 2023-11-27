@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:32:00 by oel-feng          #+#    #+#             */
-/*   Updated: 2023/11/27 17:55:11 by oel-feng         ###   ########.fr       */
+/*   Updated: 2023/11/27 20:22:26 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 
 # include <fcntl.h>
 # include <stdlib.h>
-# include <limits.h>
 # include <unistd.h>
+# include <sys/syslimits.h>
 
 char	*get_next_line(int fd);
 size_t	ft_strlen(char *str);
