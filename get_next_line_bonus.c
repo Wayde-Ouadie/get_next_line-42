@@ -1,16 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:31:16 by oel-feng          #+#    #+#             */
-/*   Updated: 2023/11/27 12:43:01 by oel-feng         ###   ########.fr       */
+/*   Updated: 2023/11/27 12:52:48 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
+#include <sys/syslimits.h>
 
 static char	*ft_get_line(char *line)
 {
@@ -69,25 +70,24 @@ static char	*read_line_check(int fd, char *buff, char *line)
 
 char	*get_next_line(int fd)
 {
-	static char	*line;
-	char		*tmp;
-	char		*buff;
+  static char *line[10240];
+  char *tmp;
+  char *buff;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
-		return (NULL);
-	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buff)
-		return (NULL);
-	tmp = read_line_check(fd, buff, line);
-	free(buff);
-	buff = NULL;
-	if (!tmp)
-	{
-		if (line)
-			free(line);
-		line = NULL;
-		return (NULL);
+  if (fd < 0 || BUFFER_SIZE <= 0 || fd > 10240)
+    return (NULL);
+  buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+  if (!buff)
+    return (NULL);
+  tmp = read_line_check(fd, buff, line[fd]);
+  free(buff);
+  buff = NULL;
+  if (!tmp) {
+    if (line[fd])
+      free(line[fd]);
+    line[fd] = NULL;
+    return (NULL);
 	}
-	line = ft_get_line(tmp);
+	line[fd] = ft_get_line(tmp);
 	return (tmp);
 }
