@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:32:00 by oel-feng          #+#    #+#             */
-/*   Updated: 2023/11/27 12:49:51 by oel-feng         ###   ########.fr       */
+/*   Updated: 2023/11/27 17:55:11 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@
 #  define BUFFER_SIZE 100
 # endif
 
-# include <stdlib.h>
 # include <fcntl.h>
+# include <stdlib.h>
+# include <limits.h>
 # include <unistd.h>
 
 char	*get_next_line(int fd);

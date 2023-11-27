@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:31:16 by oel-feng          #+#    #+#             */
-/*   Updated: 2023/11/27 12:53:34 by oel-feng         ###   ########.fr       */
+/*   Updated: 2023/11/27 17:54:57 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,23 +69,24 @@ static char	*read_line_check(int fd, char *buff, char *line)
 
 char	*get_next_line(int fd)
 {
-  static char *line[10240];
-  char *tmp;
-  char *buff;
+	static char	*line[10240];
+	char		*tmp;
+	char		*buff;
 
-  if (fd < 0 || BUFFER_SIZE <= 0 || fd > 10240)
-    return (NULL);
-  buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
-  if (!buff)
-    return (NULL);
-  tmp = read_line_check(fd, buff, line[fd]);
-  free(buff);
-  buff = NULL;
-  if (!tmp) {
-    if (line[fd])
-      free(line[fd]);
-    line[fd] = NULL;
-    return (NULL);
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > OPEN_MAX)
+		return (NULL);
+	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buff)
+		return (NULL);
+	tmp = read_line_check(fd, buff, line[fd]);
+	free(buff);
+	buff = NULL;
+	if (!tmp)
+	{
+		if (line[fd])
+			free(line[fd]);
+		line[fd] = NULL;
+		return (NULL);
 	}
 	line[fd] = ft_get_line(tmp);
 	return (tmp);
