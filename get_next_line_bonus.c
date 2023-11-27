@@ -6,12 +6,11 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:31:16 by oel-feng          #+#    #+#             */
-/*   Updated: 2023/11/27 12:52:48 by oel-feng         ###   ########.fr       */
+/*   Updated: 2023/11/27 12:53:34 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line_bonus.h"
-#include <sys/syslimits.h>
 
 static char	*ft_get_line(char *line)
 {
