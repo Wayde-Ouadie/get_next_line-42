@@ -6,12 +6,11 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:31:16 by oel-feng          #+#    #+#             */
-/*   Updated: 2023/11/27 00:28:12 by oel-feng         ###   ########.fr       */
+/*   Updated: 2023/11/27 12:43:01 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 static char	*ft_get_line(char *line)
 {
