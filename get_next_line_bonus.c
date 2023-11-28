@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:31:16 by oel-feng          #+#    #+#             */
-/*   Updated: 2023/11/28 16:00:56 by oel-feng         ###   ########.fr       */
+/*   Updated: 2023/11/28 21:10:45 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static char	*read_line_check(int fd, char *buff, char *line)
 	return (line);
 }
 
-char	*get_next_line(int fd)
+char	*get_next_line_bonus(int fd)
 {
 	static char	*line[OPEN_MAX];
 	char		*tmp;
@@ -75,7 +75,7 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || fd > OPEN_MAX)
 		return (NULL);
-	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	buff = malloc(sizeof(char) * ((size_t)BUFFER_SIZE + 1));
 	if (!buff)
 		return (NULL);
 	tmp = read_line_check(fd, buff, line[fd]);
@@ -88,6 +88,6 @@ char	*get_next_line(int fd)
 		line[fd] = NULL;
 		return (NULL);
 	}
-	line[fd] = read_the_line(tmp);
+	line[fd] = ft_get_line(tmp);
 	return (tmp);
 }

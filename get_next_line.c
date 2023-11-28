@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:31:16 by oel-feng          #+#    #+#             */
-/*   Updated: 2023/11/28 15:57:50 by oel-feng         ###   ########.fr       */
+/*   Updated: 2023/11/28 21:11:44 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ char	*get_next_line(int fd)
 	char		*tmp;
 	char		*buff;
 
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > OPEN_MAX)
 		return (NULL);
-	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
+	buff = malloc(sizeof(char) * ((size_t)BUFFER_SIZE + 1));
 	if (!buff)
 		return (NULL);
 	tmp = read_line_check(fd, buff, line);
@@ -88,6 +88,6 @@ char	*get_next_line(int fd)
 		line = NULL;
 		return (NULL);
 	}
-	line = read_the_line(tmp);
+	line = ft_get_line(tmp);
 	return (tmp);
 }
