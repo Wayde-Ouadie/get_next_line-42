@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:31:16 by oel-feng          #+#    #+#             */
-/*   Updated: 2023/11/28 15:54:25 by oel-feng         ###   ########.fr       */
+/*   Updated: 2023/11/28 15:57:50 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,6 @@ char	*get_next_line(int fd)
 		line = NULL;
 		return (NULL);
 	}
-	line = ft_get_line(tmp);
+	line = read_the_line(tmp);
 	return (tmp);
 }
