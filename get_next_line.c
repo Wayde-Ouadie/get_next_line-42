@@ -6,13 +6,13 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:31:16 by oel-feng          #+#    #+#             */
-/*   Updated: 2023/11/27 12:43:01 by oel-feng         ###   ########.fr       */
+/*   Updated: 2023/11/28 15:54:25 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char	*ft_get_line(char *line)
+static char	*read_the_line(char *line)
 {
 	char	*res;
 	size_t	i;
