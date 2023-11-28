@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:31:16 by oel-feng          #+#    #+#             */
-/*   Updated: 2023/11/28 15:57:42 by oel-feng         ###   ########.fr       */
+/*   Updated: 2023/11/28 16:00:56 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static char	*read_line_check(int fd, char *buff, char *line)
 	return (line);
 }
 
-char	*get_next_line_bonus(int fd)
+char	*get_next_line(int fd)
 {
 	static char	*line[OPEN_MAX];
 	char		*tmp;
