@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:32:00 by oel-feng          #+#    #+#             */
-/*   Updated: 2023/11/28 21:11:22 by oel-feng         ###   ########.fr       */
+/*   Updated: 2023/11/30 16:33:04 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,14 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 100
+#  define BUFFER_SIZE 10
 # endif
 
 # include <stdlib.h>
 # include <fcntl.h>
+# include <stdio.h>
 # include <unistd.h>
+# include <limits.h>
 # include <sys/syslimits.h>
 
 char	*get_next_line(int fd);

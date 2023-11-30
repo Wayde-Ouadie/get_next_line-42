@@ -5,89 +5,69 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/24 11:31:16 by oel-feng          #+#    #+#             */
-/*   Updated: 2023/11/28 21:11:44 by oel-feng         ###   ########.fr       */
+/*   Created: 2023/11/30 03:42:09 by oel-feng          #+#    #+#             */
+/*   Updated: 2023/11/30 16:58:58 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-static char	*read_the_line(char *line)
+static char	*read_data(int fd, char *buffer, char *data)
 {
-	char	*res;
-	size_t	i;
-
-	i = 0;
-	while (line[i] && line[i] != '\n') 
-		i++;
-	if (line[i] == '\0')
-		return (NULL);
-	res = ft_substr(line, i + 1, ft_strlen(line) - i);
-	if (!res)
-	{
-		if (line)
-			free(line);
-		line = NULL;
-		return (NULL);
-	}
-	if (*res == '\0')
-	{
-		free(res);
-		res = NULL;
-	}
-	line[i + 1] = '\0';
-	return (res);
-}
-
-static char	*read_line_check(int fd, char *buff, char *line)
-{
-	int		lread;
-	char	*tmp;
+	ssize_t	lread;
 
 	lread = 1;
-	while (lread)
+	while (lread && !ft_strchr(buffer, '\n'))
 	{
-		lread = read(fd, buff, BUFFER_SIZE);
-		if (lread == -1)
-			return (NULL);
-		else if (lread == 0)
-			break ;
-		buff[lread] = '\0';
-		if (!line)
-			line = ft_strdup("");
-		tmp = line;
-		line = ft_strjoin(tmp, buff);
-		free(tmp);
-		tmp = NULL;
-		if (!line)
-			return (NULL);
-		if (ft_strchr(buff, '\n'))
-			break ;
+		lread = read(fd, buffer, BUFFER_SIZE);
+		if (lread < 0)
+			return (free(data), data = NULL, NULL);
+		buffer[lread] = 0;
+		data = ft_strjoin(data, buffer);
 	}
-	return (line);
+	return (data);
+}
+
+static char	*gettingline(char *data)
+{
+	int	i;
+
+	i = 0;
+	while (data[i] && data[i] != '\n')
+		i++;
+	return (ft_substr(data, 0, i + 1));
+}
+
+static char	*updata(char *data)
+{
+	char	*tmp;
+	int		i;
+
+	i = 0;
+	while (data[i] && data[i] != '\n')
+		i++;
+	(data[i] == '\n') && (i += 1);
+	tmp = ft_substr(data, i, ft_strlen(data + i));
+	return (free(data), tmp);
 }
 
 char	*get_next_line(int fd)
 {
-	static char	*line;
-	char		*tmp;
-	char		*buff;
+	static char	*data;
+	char		*line;
+	char		*buffer;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || fd > OPEN_MAX)
+	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE > INT_MAX)
+		return (free(data), data = NULL, NULL);
+	buffer = malloc(sizeof(char *) * ((size_t)BUFFER_SIZE + 1));
+	if (!buffer)
+		return (free(data), NULL);
+	buffer[0] = 0;
+	data = read_data(fd, buffer, data);
+	free(buffer);
+	if (!data)
 		return (NULL);
-	buff = malloc(sizeof(char) * ((size_t)BUFFER_SIZE + 1));
-	if (!buff)
-		return (NULL);
-	tmp = read_line_check(fd, buff, line);
-	free(buff);
-	buff = NULL;
-	if (!tmp)
-	{
-		if (line)
-			free(line);
-		line = NULL;
-		return (NULL);
-	}
-	line = ft_get_line(tmp);
-	return (tmp);
+	if (!*data)
+		return (free(data), data = NULL, NULL);
+	return (line = gettingline(data), data = updata(data), line);
 }

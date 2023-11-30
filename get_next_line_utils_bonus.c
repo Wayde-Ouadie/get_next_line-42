@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:31:11 by oel-feng          #+#    #+#             */
-/*   Updated: 2023/11/27 12:49:57 by oel-feng         ###   ########.fr       */
+/*   Updated: 2023/11/30 04:04:03 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ char	*ft_strjoin(char *s1, char *s2)
 	size_t	i;
 	size_t	j;
 
-	if (!s1 || !s2)
-		return (NULL);
+	if (!s1)
+		return (ft_strdup(s2));
 	i = 0;
 	j = 0;
 	res = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
@@ -60,6 +60,7 @@ char	*ft_strjoin(char *s1, char *s2)
 		i++;
 	}
 	res[i] = '\0';
+	free(s1);
 	return (res);
 }
 

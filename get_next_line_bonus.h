@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/24 11:32:00 by oel-feng          #+#    #+#             */
-/*   Updated: 2023/11/28 15:51:35 by oel-feng         ###   ########.fr       */
+/*   Updated: 2023/11/30 16:33:21 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,17 @@
 # define GET_NEXT_LINE_BONUS_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 100
+#  define BUFFER_SIZE 10
 # endif
 
-# include <fcntl.h>
 # include <stdlib.h>
+# include <fcntl.h>
+# include <stdio.h>
 # include <unistd.h>
+# include <limits.h>
 # include <sys/syslimits.h>
 
-char	*get_next_line_bonus(int fd);
+char	*get_next_line(int fd);
 size_t	ft_strlen(char *str);
 char	*ft_strchr(char *str, int c);
 char	*ft_strjoin(char *s1, char *s2);
