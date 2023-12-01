@@ -6,7 +6,7 @@
 /*   By: oel-feng <oel-feng@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/30 03:42:09 by oel-feng          #+#    #+#             */
-/*   Updated: 2023/11/30 16:58:58 by oel-feng         ###   ########.fr       */
+/*   Updated: 2023/12/01 17:06:41 by oel-feng         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	*get_next_line(int fd)
 	char		*buffer;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE > INT_MAX)
-		return (free(data), data = NULL, NULL);
+		return (NULL);
 	buffer = malloc(sizeof(char *) * ((size_t)BUFFER_SIZE + 1));
 	if (!buffer)
 		return (free(data), NULL);
