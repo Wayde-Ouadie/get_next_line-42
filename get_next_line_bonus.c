@@ -59,7 +59,7 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || BUFFER_SIZE > INT_MAX || fd > OPEN_MAX)
 		return (NULL);
-	buffer = malloc(sizeof(char *) * ((size_t)BUFFER_SIZE + 1));
+	buffer = malloc(sizeof(char) * ((size_t)BUFFER_SIZE + 1));
 	if (!buffer)
 		return (free(data[fd]), NULL);
 	buffer[0] = 0;
